@@ -1,0 +1,87 @@
+# 
+# BSD SKAP --- Sparky's AssetPack Official C++ Implementation
+# Copyright (C) 2024 Wasym A. Alonso
+# 
+# This file is part of SKAP.
+# 
+# SKAP is free software: you can redistribute it and/or modify
+# it under the terms of the BSD 3-Clause "New" or "Revised" License
+# as published by The Regents of the University of California.
+# 
+# SKAP is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# BSD 3-Clause "New" or "Revised" License for more details.
+# 
+# You should have received a copy of the BSD 3-Clause "New" or
+# "Revised" License along with SKAP.
+# If not, see <https://opensource.org/license/BSD-3-Clause>.
+# 
+
+
+#+AUTHOR: Wasym A. Alonso
+
+# Logo & Title
+#+begin_html
+<h1 align="center">
+<img src="assets/logo.png" alt="SKAP Logo">
+<br/>
+<code>*.skap</code>
+</h1>
+#+end_html
+
+# Subtitle
+#+begin_html
+<h4 align="center">
+Sparky's AssetPack (SKAP) Official C++ Implementation
+</h4>
+#+end_html
+
+# Repository marketing badges
+#+begin_html
+<p align="center">
+<a href="https://www.buymeacoffee.com/iwas.coder">
+<img src="https://cdn.buymeacoffee.com/buttons/default-yellow.png" alt="Buy Me A Coffee" height=41>
+</a>
+</p>
+#+end_html
+
+# Repository info badges
+#+begin_html
+<p align="center">
+<img src="https://img.shields.io/github/license/sparky-game/skap-cpp?color=blue" alt="License">
+<img src="https://img.shields.io/github/repo-size/sparky-game/skap-cpp?color=blue" alt="Size">
+<img src="https://img.shields.io/github/v/tag/sparky-game/skap-cpp?color=blue" alt="Release">
+</p>
+#+end_html
+
+(...)
+
+# BSD-3-Clause License notice
+#+begin_quote
+SKAP is free software: you can redistribute it and/or modify it under the terms of the BSD 3-Clause "New" or "Revised" License as published by The Regents of the University of California. @@html:<br>@@
+SKAP is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the BSD 3-Clause "New" or "Revised" License for more details. @@html:<br>@@
+You should have received a copy of the BSD 3-Clause "New" or "Revised" License along with SKAP. If not, see <https://opensource.org/license/BSD-3-Clause>.
+#+end_quote
+
+* Table of Contents :toc:
+- [[#usage][Usage]]
+- [[#build-from-source][Build from source]]
+
+* Usage
+
+(...)
+
+* Build from source
+
+First, ensure the source tree is absolutely clean. From /Sparky/ we recommend this command to be issued prior to each compilation; do not rely on the source tree being clean after cloning the repository or after un-tarring:
+
+#+begin_src sh
+make mrproper
+#+end_src
+
+To build SKAP, issue the following command:
+
+#+begin_src sh
+make
+#+end_src
