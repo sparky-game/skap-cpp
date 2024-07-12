@@ -6,6 +6,15 @@ PPO_LD    = LD
 CXX           = clang++
 OPTIMIZATIONS = -pipe -O3
 
+YAMLCPP_HDR_DIR   = vendor/yaml-cpp/include
+YAMLCPP_SRC_DIR   = vendor/yaml-cpp/src
+YAMLCPP_BUILD_DIR = build/yaml-cpp
+YAMLCPP_SRCS     := $(wildcard $(YAMLCPP_SRC_DIR)/*.cpp) $(wildcard $(YAMLCPP_SRC_DIR)/contrib/*.cpp)
+YAMLCPP_OBJS     := $(patsubst $(YAMLCPP_SRC_DIR)/%.cpp, $(YAMLCPP_BUILD_DIR)/%.o, $(YAMLCPP_SRCS))
+YAMLCPP_OBJS     := $(patsubst $(YAMLCPP_BUILD_DIR)/contrib/%.o, $(YAMLCPP_BUILD_DIR)/%.o, $(YAMLCPP_OBJS))
+YAMLCPP_CPPFLAGS  = -isystem $(YAMLCPP_HDR_DIR)
+YAMLCPP_CXXFLAGS  = -std=c++11 $(OPTIMIZATIONS)
+
 SKAP_HDR_DIR   = include
 SKAP_SRC_DIR   = src
 SKAP_BUILD_DIR = build
@@ -16,18 +25,28 @@ SKAP_CXXFLAGS  = -std=c++20 -Wall -Wextra -Wpedantic -Werror $(OPTIMIZATIONS)
 SKAP_LDFLAGS   = -static $(OPTIMIZATIONS)
 SKAP_OUT       = skap
 
+DIRS_OUT = $(SKAP_BUILD_DIR) $(YAMLCPP_BUILD_DIR)
+
 .PHONY: all clean mrproper
 
-all: $(SKAP_BUILD_DIR) $(SKAP_OUT)
+all: $(DIRS_OUT) $(SKAP_OUT)
 	@:
 
-$(SKAP_BUILD_DIR):
+$(DIRS_OUT):
 	@echo "  $(PPO_MKDIR)   $@"
 	@mkdir -p $@
 
-$(SKAP_OUT): $(SKAP_OBJS)
+$(SKAP_OUT): $(YAMLCPP_OBJS) $(SKAP_OBJS)
 	@echo "  $(PPO_LD)      $@"
 	@$(CXX) $^ $(SKAP_LDFLAGS) -o $@
+
+$(YAMLCPP_BUILD_DIR)/%.o: $(YAMLCPP_SRC_DIR)/%.cpp
+	@echo "  $(PPO_CXX)     $@"
+	@$(CXX) $(YAMLCPP_CPPFLAGS) $(YAMLCPP_CXXFLAGS) -c -MD $< -o $@
+
+$(YAMLCPP_BUILD_DIR)/%.o: $(YAMLCPP_SRC_DIR)/contrib/%.cpp
+	@echo "  $(PPO_CXX)     $@"
+	@$(CXX) $(YAMLCPP_CPPFLAGS) $(YAMLCPP_CXXFLAGS) -c -MD $< -o $@
 
 $(SKAP_BUILD_DIR)/%.o: $(SKAP_SRC_DIR)/%.cc
 	@echo "  $(PPO_CXX)     $@"
