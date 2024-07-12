@@ -20,7 +20,7 @@ SKAP_SRC_DIR   = src
 SKAP_BUILD_DIR = build
 SKAP_SRCS     := $(wildcard $(SKAP_SRC_DIR)/*.cc)
 SKAP_OBJS     := $(patsubst $(SKAP_SRC_DIR)/%.cc, $(SKAP_BUILD_DIR)/%.o, $(SKAP_SRCS))
-SKAP_CPPFLAGS  = -I $(SKAP_HDR_DIR)
+SKAP_CPPFLAGS  = -I $(SKAP_HDR_DIR) -isystem $(YAMLCPP_HDR_DIR)
 SKAP_CXXFLAGS  = -std=c++20 -Wall -Wextra -Wpedantic -Werror $(OPTIMIZATIONS)
 SKAP_LDFLAGS   = -static $(OPTIMIZATIONS)
 SKAP_OUT       = skap
