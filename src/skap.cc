@@ -1,5 +1,6 @@
 #include <iostream>
 #include <filesystem>
+#include <skap_header.hh>
 #include <yaml-cpp/yaml.h>
 
 static constexpr std::string kind    { "SKAP" };
@@ -32,5 +33,11 @@ int main(int argc, char **argv) {
     usage(argv[0]);
   }
   const std::string name { mf["metadata"]["name"].as<std::string>() + ".skap" };
-  std::cout << "Output SKAP file: " << name << std::endl;
+  std::cout << "Output SKAP file info:" << std::endl;
+  std::cout << "  name:               " << name << std::endl;
+
+  skap::Header header {{}};
+  std::cout << "  build_ver:          " << header.build_ver << std::endl;
+  std::cout << "  idx_counters.image: " << header.idx_counters.image << std::endl;
+  std::cout << "  idx_counters.audio: " << header.idx_counters.audio << std::endl;
 }
